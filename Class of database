@@ -1,0 +1,16 @@
+#include <iostream>
+#include <string>
+
+class DataBase {
+public:
+	struct Student_db
+	{
+		string firstName;
+		string lastName;
+		string father;
+		string dateOfBorn;
+		string IdGroup;
+	};
+private:
+	int Id;
+};
