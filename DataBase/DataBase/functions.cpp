@@ -1,6 +1,5 @@
-#include "Header.h"
-#include <fstream>
-#include <iostream>
+#include "header.h"
+
 using namespace std;
 
 void print(int value) {

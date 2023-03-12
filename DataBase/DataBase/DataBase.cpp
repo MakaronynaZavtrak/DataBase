@@ -1,7 +1,5 @@
-﻿#include <iostream>
-#include <fstream>
-#include <string>
-#include "Header.h"
+﻿#include "header.h"
+
 using namespace std;
 /*
 Должна быть расшифровка группы, как в обычном унике, а id группы может быть произвольным.
@@ -35,14 +33,17 @@ ID лучше рассмотреть отдельно, чтобы генерац
 
 int main()
 {
-	setlocale(LC_ALL, "RUSSIAN");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 	string studentFile;
 	int amountOfStudents;
 	preProcessing(studentFile, amountOfStudents);
 
 	StudentsDB StudentDataBase = StudentsDB(amountOfStudents);
 	StudentDataBase.print();
-
+	StudentDataBase.addStudent();
+	StudentDataBase.print();		
+	StudentDataBase.dumpStudents();
 	return 0;
 };
 
