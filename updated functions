@@ -8,7 +8,7 @@ void print(int value) {
 void print(string value) {
 	cout << value << endl;
 };
-void checkAndOpenning(ifstream& file, string path) {
+void checkOfOpen(ifstream& file, string path) {
 	file.open(path);
 	if (file.is_open()) {
 		cout << "Файл успешно открыт" << endl;
@@ -16,6 +16,7 @@ void checkAndOpenning(ifstream& file, string path) {
 	else {
 		cout << "Произошла ошибка при открытии файла" << endl;
 	};
+	file.close();
 };
 
 int countStudents(ifstream& file, string path_of_file) {//функция-препроцессинг, которая считывает суммарное количество студентов
@@ -33,54 +34,57 @@ int countStudents(ifstream& file, string path_of_file) {//функция-пре�
 
 void preProcessing(string& FileStudentsDB, int& amountOfStudents)
 {
-	ifstream config("config.txt");
+	ifstream config("config.txt");//нужно добавить обработку айди из файла
 	config >> FileStudentsDB;
 	config >> amountOfStudents;
 	config.close();
 }
-StudentsDB::Student* find(StudentsDB::Student* arr, int id, string lastName, string name, string father, string groupNumber, string studNumber) {
-	StudentsDB::Student* temp = new StudentsDB::Student[sizeof(arr)/sizeof(arr[0])];
+
+StudentsDB::Student* find(StudentsDB::Student* arr, int id, string lastName, string name, string father, string groupNumber, string studNumber) {//функция нахождения студентов (с частично одинаковыми персональными данными
+	StudentsDB::Student* temp = new StudentsDB::Student[sizeof(arr) / sizeof(arr[0])];
 	int j = 0;
-		for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++) {
-			if (id != -1) {
-				if (arr[i].id == id) {
-					temp[j] = arr[i];
-					break;
-				};
+	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++) {
+		if (id != -1) {
+			if (arr[i].id == id) {
+				temp[j] = arr[i];
+				break;
 			};
+		};
 
-			if (lastName != "") {
-				if (arr[i].lastName == lastName) {
-					temp[j] = arr[i];
-					j++;
-				};
+		if (lastName != "") {
+			if (arr[i].lastName == lastName) {
+				temp[j] = arr[i];
+				j++;
 			};
+		};
 
-			if (name != "") {
-				if (arr[i].name == name) {
-					temp[j] = arr[i];
-					j++;
-				};
+		if (name != "") {
+			if (arr[i].name == name) {
+				temp[j] = arr[i];
+				j++;
 			};
+		};
 
-			if (father != "") {
-				if (arr[i].father == father) {
-					temp[j] = arr[i];
-					j++;
-				};
+		if (father != "") {
+			if (arr[i].father == father) {
+				temp[j] = arr[i];
+				j++;
 			};
+		};
 
-			if (groupNumber != "") {
-				if (arr[i].groupNumber == groupNumber) {
-					temp[j] = arr[i];
-					j++;
-				};
+		if (groupNumber != "") {
+			if (arr[i].groupNumber == groupNumber) {
+				temp[j] = arr[i];
+				j++;
 			};
+		};
 
-			if (studNumber != "") {
-				if (arr[i].studNumber == studNumber) {
-					temp[j] = arr[i];
-					j++;
-				};
+		if (studNumber != "") {
+			if (arr[i].studNumber == studNumber) {
+				temp[j] = arr[i];
+				j++;
 			};
+		};
+	};
+	return temp;
 };
